@@ -105,7 +105,7 @@ sys_clone(void)
 int fcn , arg1 , arg2 ,stack;
 if(argint(0,&fcn)<0)return -1;
 if(argint(1,&arg1)<0)return -1;
-if(argint(2,&arg2<0)return -1;
+if(argint(2,&arg2)<0)return -1;
 if(argint(3,&stack)<0)return -1;
-return clone((void*)fcn,(void*)arg1,(void*)arg2,(void*)stack);
+return clone((void *)fcn, (void *)arg1, (void *)arg2,(void *)stack);
 }

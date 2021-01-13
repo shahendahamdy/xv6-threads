@@ -532,14 +532,14 @@ procdump(void)
     cprintf("\n");
   }
 }
-int clone (void(*fcn)(void*)(void*),void *arg1 ,void *arg2 ,void* stack)
+int clone (void(*fcn)(void*,void*),void *arg1 ,void *arg2 ,void* stack)
 {
 struct proc *newp;  //newprocess
 struct proc *currp = myproc(); //parent process 
 
 //if allocating new process failed allocproc() return 0 : else return proc
 //if failled clone() will return -1 
-if(newp = allocproc()==0) return -1;  
+if((newp = allocproc())==0) return -1;  
 
 //setting new process data
 newp->pgdir = currp->pgdir;  //have same process page table
@@ -554,12 +554,12 @@ uint user_stack[3];  //decalring arrray of 3 elements
 
 user_stack[0]= 0xffffffff ;  //fake return address for thread's stack
 user_stack[1]= (uint) arg1 ; //first arg
-uer_stack[2]= (uint) arg2 ; //second arg (will be the top of stack)
+user_stack[2]= (uint) arg2 ; //second arg (will be the top of stack)
 
 stack_top-=12; //cause we will push 3 elements in the stack
 
 // copying 12 bytes from the arry user_stack into memory location stack_top(offset) in the newp->pgdir 
-if(copyout(newp->pgdir , stack_top , user_stack ,12) < 0) rerutn -1;
+if(copyout(newp->pgdir , stack_top , user_stack ,12) < 0) return -1;
 
 //setting base and stack pointers for the return from trap
 //they will be the same because we are returning into function
@@ -577,12 +577,12 @@ for(int i=0 ; i<NOFILE ; i++) //looping over 14 openfile of process
 newp->cwd =idup(currp->cwd); 
 
 //setting the name of new process as same the name of currnet process
-safestrcpy(newp->name ,currp->name ,sizeof(currp->name);)
+safestrcpy(newp->name ,currp->name ,sizeof(currp->name));
 
 acquire(&ptable.lock);  //make the lock =1
 newp->state = RUNNABLE;
 release(&ptable.lock);  //release spinlock from being held by cpu
 return newp->pid;
 
-
 }
+
