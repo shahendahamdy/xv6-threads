@@ -26,6 +26,7 @@ int uptime(void);
 int getyear(void);
 int getreadcount(void);
 int clone(void(*start_routine)(void*,void*),void*,void*,void*);
+int join(void**);
 
 // ulib.c
 int stat(const char*, struct stat*);
@@ -41,3 +42,4 @@ void* malloc(uint);
 void free(void*);
 int atoi(const char*);
 int thread_create(void(*start_routine)(void*,void*), void* arg1, void* arg2);
+int thread_join();

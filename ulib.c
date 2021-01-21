@@ -111,6 +111,13 @@ void* stack;
 stack =malloc(4096);  //pgsize
 return clone(start_routine,arg1,arg2,stack);
 }
+int thread_join()
+{
+  void * stackPtr;
+  int x = join(&stackPtr);
+  
+  return x;
+}
 
 
 ///umalloc.c

@@ -109,3 +109,11 @@ if(argint(2,&arg2)<0)return -1;
 if(argint(3,&stack)<0)return -1;
 return clone((void *)fcn, (void *)arg1, (void *)arg2,(void *)stack);
 }
+int 
+sys_join(){
+void **stack;
+  int stackArg;
+  stackArg = argint(0, &stackArg);
+  stack = (void**) stackArg;
+  return join(stack);
+}

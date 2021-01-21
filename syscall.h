@@ -23,3 +23,4 @@
 #define SYS_getyear 22
 #define SYS_getreadcount 23
 #define SYS_clone  24
+#define SYS_join 25
