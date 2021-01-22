@@ -8297,7 +8297,7 @@ newp->parent = currp;
 uint stack_top = (uint) stack + PGSIZE;
 uint user_stack[3];  //decalring arrray of 3 elements
 
-user_stack[0]= 0xffffffff ;  //fake return address for thread's stack
+user_stack[0]= 0xffffffff ;  //fake return address for thread's stack(first address in stack which base ponter points to)
 80104324:	c7 45 dc ff ff ff ff 	movl   $0xffffffff,-0x24(%ebp)
 newp->tf->eax = 0 ;          //clearing eax to return 0 in the child
 8010432b:	8b 43 1c             	mov    0x1c(%ebx),%eax

@@ -552,7 +552,7 @@ newp->tf->eax = 0 ;          //clearing eax to return 0 in the child
 uint stack_top = (uint) stack + PGSIZE;
 uint user_stack[3];  //decalring arrray of 3 elements
 
-user_stack[0]= 0xffffffff ;  //fake return address for thread's stack
+user_stack[0]= 0xffffffff ;  //fake return address for thread's stack(first address in stack which base ponter points to)
 user_stack[1]= (uint) arg1 ; //first arg
 user_stack[2]= (uint) arg2 ; //second arg (will be the top of stack)
 

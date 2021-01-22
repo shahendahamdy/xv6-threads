@@ -1,6 +1,6 @@
 struct stat;
 struct rtcdate;
-
+struct lock_t;
 // system calls
 int fork(void);
 int exit(void) __attribute__((noreturn));
@@ -28,6 +28,7 @@ int getreadcount(void);
 int clone(void(*start_routine)(void*,void*),void*,void*,void*);
 int join(void**);
 
+
 // ulib.c
 int stat(const char*, struct stat*);
 char* strcpy(char*, const char*);
@@ -43,3 +44,6 @@ void free(void*);
 int atoi(const char*);
 int thread_create(void(*start_routine)(void*,void*), void* arg1, void* arg2);
 int thread_join();
+void lock_init(struct lock_t *);
+void lock_acquire(struct lock_t *);
+void lock_release(struct lock_t *);

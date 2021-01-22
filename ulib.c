@@ -4,6 +4,12 @@
 #include "user.h"
 #include "x86.h"
 
+struct lock_t
+{
+uint locked;
+};
+
+
 char*
 strcpy(char *s, const char *t)
 {
@@ -119,6 +125,15 @@ int thread_join()
   return x;
 }
 
+void lock_init(struct lock_t *lk){
+lk->locked=0; //intialize as unnlocked
+}
+void lock_acquire(struct lock_t *lk){
+while(xchg(&lk->locked,1) != 0);
+}
+void lock_release(struct lock_t *lk){
+  xchg(&lk->locked,0) ;
+}
 
 ///umalloc.c
 typedef long Align;
@@ -203,3 +218,4 @@ malloc(uint nbytes)
         return 0;
   }
 }
+
